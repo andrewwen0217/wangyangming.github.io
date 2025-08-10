@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog | Sticky Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="style/common.css">
+    <style>
+        /* contact.css - 联系页面专属样式（优化版） */
+        .box-content {
+            background: #fff;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .title--h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .title__separate::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #6dd5fa);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .title--h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+        }
+
+        /* 表单整体样式 */
+        .contact-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* 表单组 */
+        .form-group {
+            flex: 1 1 100%;
+        }
+
+        @media (min-width: 768px) {
+            .form-group.col-md-6 {
+                flex: 1 1 calc(50% - 10px);
+            }
+        }
+
+        /* 输入框和文本框样式 */
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        /* 文本域可调节高度 */
+        .textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* 按钮样式 */
+        .btn {
+            background: linear-gradient(90deg, #3498db, #2c3e50);
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            outline: none;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .box-content {
+                padding: 20px;
+                margin: 0 10px;
+            }
+
+            .title--h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header Background -->
+        <div class="header-background">
+            <img src="image/image_header.jpg" alt="博客头部背景">
+        </div>
+
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <!-- Avatar -->
+            <div class="avatar-container">
+                <img src="image/avatar-6.jpg" alt="个人头像">
+            </div>
+
+            <!-- Personal Info -->
+            <div class="profile-info">
+                <h1>Wang Yangming</h1>
+                <p>Philosopher, Educator & Military General</p>
+
+                <!-- Social Media Links -->
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-zhihu"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <ul>
+                    <li><i class="fas fa-envelope"></i> wangyangming@example.com</li>
+                    <li><i class="fas fa-phone"></i> 138-8888-8888</li>
+                    <li><i class="fas fa-birthday-cake"></i> October 31, 1472</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Yuyao, Zhejiang Province, Ming Dynasty
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="about.html">About Me</a></li>
+                <li class="nav-item"><a href="resume.html">Resume</a></li>
+                <li class="nav-item"><a href="single.html">Portfolio</a></li>
+                <li class="nav-item"><a href="works.html">Works</a></li>
+                <li class="nav-item"><a href="blog.html">Blog</a></li> <!-- 假设博客页面是index.html, 或者根据实际情况调整 -->
+                <li class="nav-item"><a href="contact.html" class="active">Contact Me</a></li>
+            </ul>
+        </nav>
+        <!-- Main Content Area -->
+        <div class="content-container">
+            <!-- Sidebar (About Me) -->
+            <aside class="sidebar">
+                <h2>About Me</h2>
+                <p>我是王阳明，明代著名的思想家、政治家与教育家，创立了以“心学”为核心的阳明学派。我主张“心即理”，认为道德之理不在外求，而本自具足于每个人的内心。</p>
+                <p>我一生致力于自我修养、躬行实践，始终践行“知行合一”的理念。虽历任官职，平定叛乱，遭贬龙场，却始终不离讲学著述。从困顿贬谪到军政实务，我的经历让我更加坚信：真正的智慧，不来自书本的堆砌，而源于内心的体悟与事上的磨炼。
+                </p>
+            </aside>
+
+            <!-- Blog Content Area -->
+            <div class="box box-content">
+                <div class="pb-2">
+                    <h1 class="title title--h1 first-title title__separate">Contact</h1>
+                </div>
+
+                <!-- Contact -->
+                <h2 class="title title--h3">Contact Form</h2>
+
+                <form id="contact-form" class="contact-form" data-toggle="validator">
+                    <div class="row">
+                        <div class="form-group col-12 col-md-6">
+                            <input type="text" class="form-control" id="nameContact" name="nameContact"
+                                placeholder="Full name" required="required" autocomplete="on"
+                                oninvalid="setCustomValidity('Fill in the field')" onkeyup="setCustomValidity('')">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group col-12 col-md-6">
+                            <input type="email" class="form-control" id="emailContact" name="emailContact"
+                                placeholder="Email address" required="required" autocomplete="on"
+                                oninvalid="setCustomValidity('Email is incorrect')" onkeyup="setCustomValidity('')">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                        <div class="form-group col-12 col-md-12">
+                            <textarea class="textarea form-control" id="messageContact" name="messageContact"
+                                placeholder="Your Message" rows="4" required="required"
+                                oninvalid="setCustomValidity('Fill in the field')"
+                                onkeyup="setCustomValidity('')"></textarea>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-2 order-md-1 text-center text-md-left">
+                            <div id="validator-contact" class="hidden"></div>
+                        </div>
+                        <div class="col-12 col-md-6 order-1 order-md-2 text-right">
+                            <button type="submit" class="btn"><i class="font-icon icon-send"></i> Send
+                                Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© 2023 Zhang Ming's Personal Blog | All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>

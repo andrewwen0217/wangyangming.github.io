@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog | Sticky Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="style/common.css">
+    <style>
+        /* works.css - 作品集页面专属样式（优化版） */
+        .box-content {
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            /* 统一内容容器样式 */
+        }
+
+        .title--h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .title__separate::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #6dd5fa);
+            margin-top: 10px;
+            border-radius: 2px;
+            /* 装饰性分割线 */
+        }
+
+        /* 筛选器 */
+        .select {
+            position: relative;
+            max-width: 300px;
+            margin-bottom: 30px;
+        }
+
+        .placeholder {
+            display: block;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            background: #f8f9fa;
+            user-select: none;
+            /* 防止文本被误选中 */
+            transition: background 0.3s ease;
+        }
+
+        .placeholder:hover {
+            background: #e9ecef;
+        }
+
+        .filter {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            z-index: 10;
+            display: none;
+            max-height: 200px;
+            overflow-y: auto;
+            /* 防止选项太多时溢出 */
+        }
+
+        .filter__item {
+            padding: 8px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .filter__item:hover {
+            background: #f1f2f6;
+        }
+
+        .filter__item.active {
+            background: #e3f2fd;
+        }
+
+        .filter__link {
+            color: #555;
+            display: block;
+            text-decoration: none;
+        }
+
+        .filter__link.active {
+            color: #3498db;
+            font-weight: 500;
+        }
+
+        /* 3×3 作品网格布局 */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-grid__item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 4 / 3;
+            background: #fff;
+        }
+
+        .gallery-grid__item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-grid__image-wrap {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .gallery-grid__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-grid__item:hover .gallery-grid__image {
+            transform: scale(1.05);
+        }
+
+        .gallery-grid__caption {
+            padding: 15px;
+        }
+
+        .gallery-grid__title {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .gallery-grid__category {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .box-content {
+                padding: 20px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .select {
+                max-width: 100%;
+            }
+        }
+
+        /* 无结果提示 */
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px 0;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header Background -->
+        <div class="header-background">
+            <img src="image/image_header.jpg" alt="博客头部背景">
+        </div>
+
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <!-- Avatar -->
+            <div class="avatar-container">
+                <img src="image/avatar-6.jpg" alt="个人头像">
+            </div>
+
+            <!-- Personal Info -->
+            <div class="profile-info">
+                <h1>Wang Yangming</h1>
+                <p>Philosopher, Educator & Military General</p>
+
+                <!-- Social Media Links -->
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-zhihu"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <ul>
+                    <li><i class="fas fa-envelope"></i> wangyangming@example.com</li>
+                    <li><i class="fas fa-phone"></i> 138-8888-8888</li>
+                    <li><i class="fas fa-birthday-cake"></i> October 31, 1472</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Yuyao, Zhejiang Province, Ming Dynasty
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="about.html">About Me</a></li>
+                <li class="nav-item"><a href="resume.html">Resume</a></li>
+                <li class="nav-item"><a href="single.html">Portfolio</a></li>
+                <li class="nav-item"><a href="works.html" class="active">Works</a></li>
+                <li class="nav-item"><a href="blog.html">Blog</a></li> <!-- 假设博客页面是index.html, 或者根据实际情况调整 -->
+                <li class="nav-item"><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <div class="content-container">
+            <!-- Sidebar (About Me) -->
+            <aside class="sidebar">
+                <h2>About Me</h2>
+                <p>我是王阳明，明代著名的思想家、政治家与教育家，创立了以“心学”为核心的阳明学派。我主张“心即理”，认为道德之理不在外求，而本自具足于每个人的内心。</p>
+                <p>我一生致力于自我修养、躬行实践，始终践行“知行合一”的理念。虽历任官职，平定叛乱，遭贬龙场，却始终不离讲学著述。从困顿贬谪到军政实务，我的经历让我更加坚信：真正的智慧，不来自书本的堆砌，而源于内心的体悟与事上的磨炼。
+                </p>
+
+            </aside>
+
+            <!-- Blog Content Area -->
+            <div class="box box-content">
+                <div class="pb-2">
+                    <h1 class="title title--h1 first-title title__separate">Portfolio</h1>
+                </div>
+
+                <!-- Filter -->
+                <div class="select">
+                    <span class="placeholder">Select category</span>
+                    <ul class="filter">
+                        <li class="filter__item">Category</li>
+                        <li class="filter__item active" data-filter="*"><a class="filter__link active"
+                                href="#filter">All</a></li>
+                        <li class="filter__item" data-filter=".category-concept"><a class="filter__link"
+                                href="#filter">Concept</a>
+                        </li>
+                        <li class="filter__item" data-filter=".category-design"><a class="filter__link"
+                                href="#filter">Design</a>
+                        </li>
+                        <li class="filter__item" data-filter=".category-life"><a class="filter__link"
+                                href="#filter">Life</a></li>
+                    </ul>
+                    <input type="hidden" name="changemetoo" />
+                </div>
+
+                <!-- Gallery -->
+                <div class="gallery-grid gallery-grid-two js-grid js-filter-container">
+
+                    <!-- Item 1 -->
+                    <figure class="gallery-grid__item category-concept">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_01.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Half Avocado</h4>
+                            <span class="gallery-grid__category">Concept</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 2 -->
+                    <figure class="gallery-grid__item category-concept">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_02.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Pink Flamingo</h4>
+                            <span class="gallery-grid__category">Concept</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 3 -->
+                    <figure class="gallery-grid__item category-design">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_03.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Abstract</h4>
+                            <span class="gallery-grid__category">Design</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 4 -->
+                    <figure class="gallery-grid__item category-design">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_04.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Abstract #2</h4>
+                            <span class="gallery-grid__category">Design</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 5 -->
+                    <figure class="gallery-grid__item category-design">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_05.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Abstract #3</h4>
+                            <span class="gallery-grid__category">Design</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 6 -->
+                    <figure class="gallery-grid__item category-life">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_06.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Golden Gate</h4>
+                            <span class="gallery-grid__category">Life</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 7 -->
+                    <figure class="gallery-grid__item category-concept">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_07.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Peach</h4>
+                            <span class="gallery-grid__category">Concept</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 8 -->
+                    <figure class="gallery-grid__item category-design">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_08.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Abstract #4</h4>
+                            <span class="gallery-grid__category">Design</span>
+                        </figcaption>
+                    </figure>
+
+                    <!-- Item 9 -->
+                    <figure class="gallery-grid__item category-life">
+                        <div class="gallery-grid__image-wrap">
+                            <img class="gallery-grid__image cover lazyload" src="image/image_09.jpg" data-zoom alt="" />
+                        </div>
+                        <figcaption class="gallery-grid__caption">
+                            <h4 class="title title--h6 gallery-grid__title">Hedgehog</h4>
+                            <span class="gallery-grid__category">Life</span>
+                        </figcaption>
+                    </figure>
+                </div><!-- Gallery End -->
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© 2023 Zhang Ming's Personal Blog | All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>

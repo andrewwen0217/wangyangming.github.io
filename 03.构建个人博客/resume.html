@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog | Sticky Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="style/common.css">
+    <style>
+        /* resume.css - 简历页面专属样式 */
+        .box-content {
+            padding: 30px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .title--h1 {
+            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .title__separate::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #6dd5fa);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        .title--h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .title-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin-left: 10px;
+            border-left: 2px solid #3498db;
+        }
+
+        .timeline__item {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .timeline__item::before {
+            content: '';
+            position: absolute;
+            left: -36px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #3498db;
+        }
+
+        .timeline__title {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .timeline__period {
+            display: block;
+            font-size: 0.9rem;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .timeline__description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* 技能进度条 */
+        .box__border {
+            border: 1px solid #f1f2f6;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .progress {
+            height: 10px;
+            background: #f1f2f6;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #3498db, #6dd5fa);
+            position: relative;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 5px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        @media (max-width: 768px) {
+            .box-content {
+                padding: 20px;
+            }
+
+            .title--h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header Background -->
+        <div class="header-background">
+            <img src="image/image_header.jpg" alt="博客头部背景">
+        </div>
+
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <!-- Avatar -->
+            <div class="avatar-container">
+                <img src="image/avatar-6.jpg" alt="个人头像">
+            </div>
+
+            <!-- Personal Info -->
+            <div class="profile-info">
+                <h1>Wang Yangming</h1>
+                <p>Philosopher, Educator & Military General</p>
+
+                <!-- Social Media Links -->
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-zhihu"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <ul>
+                    <li><i class="fas fa-envelope"></i> wangyangming@example.com</li>
+                    <li><i class="fas fa-phone"></i> 138-8888-8888</li>
+                    <li><i class="fas fa-birthday-cake"></i> October 31, 1472</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Yuyao, Zhejiang Province, Ming Dynasty
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="about.html">About Me</a></li>
+                <li class="nav-item"><a href="resume.html" class="active">Resume</a></li>
+                <li class="nav-item"><a href="single.html">Portfolio</a></li>
+                <li class="nav-item"><a href="works.html">Works</a></li>
+                <li class="nav-item"><a href="blog.html">Blog</a></li> <!-- 假设博客页面是index.html, 或者根据实际情况调整 -->
+                <li class="nav-item"><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <!-- Main Content Area -->
+        <div class="content-container">
+            <!-- Sidebar (About Me) -->
+            <aside class="sidebar">
+                <h2>About Me</h2>
+                <p>我是王阳明，明代著名的思想家、政治家与教育家，创立了以“心学”为核心的阳明学派。我主张“心即理”，认为道德之理不在外求，而本自具足于每个人的内心。</p>
+                <p>我一生致力于自我修养、躬行实践，始终践行“知行合一”的理念。虽历任官职，平定叛乱，遭贬龙场，却始终不离讲学著述。从困顿贬谪到军政实务，我的经历让我更加坚信：真正的智慧，不来自书本的堆砌，而源于内心的体悟与事上的磨炼。
+                </p>
+            </aside>
+
+            <!-- Blog Content Area -->
+            <div class="box box-content">
+                <div class="pb-2">
+                    <h1 class="title title--h1 first-title title__separate">Resume</h1>
+                </div>
+
+                <!-- Experience -->
+                <!-- Experience -->
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title title--h3"><img class="title-icon" src="icons/icon-education.svg" alt="" />
+                            教育与经历
+                        </h2>
+                        <div class="timeline">
+                            <!-- Item -->
+                            <article class="timeline__item">
+                                <h5 class="title title--h5 timeline__title">南京国子监（原金陵书院）</h5>
+                                <span class="timeline__period">1490 — 1494</span>
+                                <p class="timeline__description">
+                                    在此系统研习《四书》《五经》与程朱理学，深入思考“格物致知”之道。虽遵从当时主流学说，但心中已生疑问：若理在万物，何以求之于外而不得于心？这一困惑为日后心学之悟埋下伏笔。
+                                </p>
+                            </article>
+
+                            <!-- Item -->
+                            <article class="timeline__item">
+                                <h5 class="title title--h5 timeline__title">军事与政务实践</h5>
+                                <span class="timeline__period">1500年代初</span>
+                                <p class="timeline__description">
+                                    在仕途中历任多地官职，参与平定地方动乱，积累了丰富的军事指挥与地方治理经验。我深信“事上磨练”是修养本心的重要途径，政事与兵事皆为践行良知之场。</p>
+                            </article>
+
+                            <!-- Item -->
+                            <article class="timeline__item">
+                                <h5 class="title title--h5 timeline__title">讲学与自学</h5>
+                                <span class="timeline__period">贯穿一生</span>
+                                <p class="timeline__description">
+                                    无论身处朝堂、贬所或战场，始终未辍讲学与著述。从龙场讲学，到白鹿洞书院会讲，再到晚年稽山精舍授徒，我始终倡导“致良知”与“知行合一”，以唤醒学者本心为己任。</p>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Skills -->
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title title--h3">My Skills</h2>
+                        <div class="box box__border">
+                            <!-- Progress -->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-text"><span>Web Design</span><span>80%</span></div>
+                                </div>
+                                <div class="progress-text"><span>Web Design</span></div>
+                            </div>
+
+                            <!-- Progress -->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-text"><span>Graphic Design</span><span>75%</span></div>
+                                </div>
+                                <div class="progress-text"><span>Graphic Design</span></div>
+                            </div>
+
+                            <!-- Progress -->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="90" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-text"><span>Photoshop</span><span>90%</span></div>
+                                </div>
+                                <div class="progress-text"><span>Photoshop</span></div>
+                            </div>
+
+                            <!-- Progress -->
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0"
+                                    aria-valuemax="100">
+                                    <div class="progress-text"><span>Illustrator</span><span>50%</span></div>
+                                </div>
+                                <div class="progress-text"><span>Illustrator</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© 2023 Zhang Ming's Personal Blog | All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>

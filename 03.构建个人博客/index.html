@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Blog | Sticky Sidebar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 引入公共样式 -->
+    <link rel="stylesheet" href="style/common.css">
+    <style>
+        /* ===== 优化后的 About 页面专属样式 ===== */
+
+        /* 主要内容容器 */
+        .box-content {
+            padding: 40px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            line-height: 1.75;
+        }
+
+        /* 一级标题 */
+        .title--h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.8rem;
+            /* 减少底部间距 */
+            position: relative;
+            padding-bottom: 0.8rem;
+        }
+
+        .title__separate::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #3498db, #6dd5fa);
+            margin-top: 10px;
+            border-radius: 2px;
+        }
+
+        /* 通用二级标题 */
+        .section .title--h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #34495e;
+            margin-bottom: 1rem;
+        }
+
+        /* 段落 */
+        .box-content p {
+            margin-bottom: 0.8rem;
+            /* 减少段落间距 */
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* 模块之间增加分隔线 */
+        .section {
+            padding: 1.5rem 0;
+            /* 减少模块间距 */
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        /* 服务项布局 */
+        .services .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .services .service-item {
+            flex: 1 1 calc(50% - 20px);
+            display: flex;
+            align-items: flex-start;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .services .service-item:hover {
+            background: #eef6fc;
+            transform: translateY(-3px);
+        }
+
+        .services .service-icon {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+        }
+
+        /* Testimonials 横条布局 */
+        .testimonials .review-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .testimonials .review-item:hover {
+            background: #f0f7ff;
+            transform: translateY(-2px);
+        }
+
+        .testimonials .avatar {
+            width: 60px;
+            /* 缩小头像尺寸 */
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 20px;
+            flex-shrink: 0;
+            border: 2px solid #3498db;
+            padding: 2px;
+        }
+
+        .testimonials .review-content {
+            flex: 1;
+        }
+
+        .testimonials h4 {
+            font-size: 1.1rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .testimonials p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        /* Clients 横向排列 */
+        .clients .clients-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .clients .client-logo {
+            width: 120px;
+            height: 80px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .clients .client-logo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .clients img {
+            max-height: 40px;
+            max-width: 100%;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .clients img:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        /* 间距工具类 */
+        .mt-2 {
+            margin-top: 2rem;
+        }
+
+        .mt-4 {
+            margin-top: 4rem;
+        }
+
+        /* 响应式优化 */
+        @media (max-width: 768px) {
+            .services .service-item {
+                flex: 1 1 100%;
+            }
+
+            .box-content {
+                padding: 20px;
+            }
+
+            .title--h1 {
+                font-size: 1.8rem;
+            }
+
+            /* 移动端调整Testimonials布局 */
+            .testimonials .review-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .testimonials .avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+
+            /* 移动端调整Clients布局 */
+            .clients .clients-grid {
+                gap: 15px;
+            }
+
+            .clients .client-logo {
+                width: calc(50% - 15px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <!-- Header Background -->
+        <div class="header-background">
+            <img src="image/image_header.jpg" alt="博客头部背景">
+        </div>
+
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <!-- Avatar -->
+            <div class="avatar-container">
+                <img src="image/avatar-6.jpg" alt="个人头像">
+            </div>
+
+            <!-- Personal Info -->
+            <div class="profile-info">
+                <h1>Wang Yangming</h1>
+                <p>Philosopher, Educator & Military General</p>
+
+                <!-- Social Media Links -->
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-weibo"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-zhihu"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <ul>
+                    <li><i class="fas fa-envelope"></i> wangyangming@example.com</li>
+                    <li><i class="fas fa-phone"></i> 138-8888-8888</li>
+                    <li><i class="fas fa-birthday-cake"></i> October 31, 1472</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Yuyao, Zhejiang Province, Ming Dynasty
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Navigation Menu -->
+        <nav class="main-nav">
+            <ul class="nav-list">
+                <li class="nav-item"><a href="about.html" class="active">About Me</a></li>
+                <li class="nav-item"><a href="resume.html">Resume</a></li>
+                <li class="nav-item"><a href="single.html">Portfolio</a></li>
+                <li class="nav-item"><a href="works.html">Works</a></li>
+                <li class="nav-item"><a href="blog.html">Blog</a></li> <!-- 假设博客页面是index.html, 或者根据实际情况调整 -->
+                <li class="nav-item"><a href="contact.html">Contact Me</a></li>
+            </ul>
+        </nav>
+        <!-- Main Content Area -->
+        <div class="content-container">
+            <!-- Sidebar (About Me) -->
+            <aside class="sidebar">
+                <h2>About Me</h2>
+                <p>我是王阳明，明代著名的思想家、政治家与教育家，创立了以“心学”为核心的阳明学派。我主张“心即理”，认为道德之理不在外求，而本自具足于每个人的内心。</p>
+                <p>我一生致力于自我修养、躬行实践，始终践行“知行合一”的理念。虽历任官职，平定叛乱，遭贬龙场，却始终不离讲学著述。从困顿贬谪到军政实务，我的经历让我更加坚信：真正的智慧，不来自书本的堆砌，而源于内心的体悟与事上的磨炼。
+                </p>
+            </aside>
+
+            <!-- Blog Content Area -->
+            <div class="box box-content">
+
+                <!-- About -->
+                <!-- About -->
+                <section class="section about">
+                    <h1 class="title title--h1 title__separate">关于我</h1>
+                    <p>我是王阳明，明代哲学家、教育家、军事家，浙江余姚人，创立“阳明心学”，主张“心即理”“知行合一”“致良知”，致力于唤醒人心本具之光明。</p>
+                    <p>我的志业是引导人们回归本心，将道德认知付诸实践。无论在朝为官、平定叛乱，或于山林讲学，皆以良知为本，力求内圣外王之道。我所传之学，不在书册之间，而在日用常行之中。数百年来，此心学之教已影响无数求道者。
+                    </p>
+                </section>
+
+                <!-- What I'm Doing -->
+                <!-- What I'm Doing -->
+                <section class="section services">
+                    <h2 class="title title--h3">我之所行</h2>
+                    <div class="row">
+                        <div class="col-lg-6 service-item">
+                            <img src="icons/icon-design.svg" alt="" class="service-icon">
+                            <div>
+                                <h3 class="title title--h4">讲学传道</h3>
+                                <p>以心为本，倡“致良知”之教，于各地书院讲学不辍，启迪人心，传承圣学。</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 service-item">
+                            <img src="icons/icon-dev.svg" alt="" class="service-icon">
+                            <div>
+                                <h3 class="title title--h4">著书立说</h3>
+                                <p>撰《传习录》《大学问》等，阐明“知行合一”“心即理”之旨，垂范后世。</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 service-item">
+                            <img src="icons/icon-app.svg" alt="" class="service-icon">
+                            <div>
+                                <h3 class="title title--h4">治政安民</h3>
+                                <p>任巡抚期间，平乱安邦，推行乡约，兴学化民，以良知之道治天下。</p>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 service-item">
+                            <img src="icons/icon-photo.svg" alt="" class="service-icon">
+                            <div>
+                                <h3 class="title title--h4">修身悟道</h3>
+                                <p>一生践行“在事上磨练”，从龙场悟道至临终遗言，始终守此心光明。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials -->
+                <section class="section testimonials">
+                    <h2 class="title title--h3">世人评说</h2>
+                    <div class="reviews-container">
+                        <!-- 评价项1 -->
+                        <div class="review-item">
+                            <img src="image/avatar-2.jpg" alt="黄宗羲" class="avatar">
+                            <div class="review-content">
+                                <h4 class="title title--h5">黄宗羲</h4>
+                                <p>阳明先生崛起，以觉民为任，一时风尚，震动天下，真豪杰之士也。</p>
+                            </div>
+                        </div>
+
+                        <!-- 评价项2 -->
+                        <div class="review-item">
+                            <img src="image/avatar-3.jpg" alt="钱德洪" class="avatar">
+                            <div class="review-content">
+                                <h4 class="title title--h5">钱德洪（弟子）</h4>
+                                <p>先生之教，如日中天，拨云见心，使学者自悟本体，实为百世之师。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Clients -->
+                <section class="section clients">
+                    <h2 class="title title--h3">Clients</h2>
+                    <div class="clients-grid">
+                        <div class="client-logo">
+                            <img src="image/logo-1.svg" alt="Client Logo">
+                        </div>
+                        <div class="client-logo">
+                            <img src="image/logo-2.svg" alt="Client Logo">
+                        </div>
+                        <div class="client-logo">
+                            <img src="image/logo-3.svg" alt="Client Logo">
+                        </div>
+                        <div class="client-logo">
+                            <img src="image/logo-4.svg" alt="Client Logo">
+                        </div>
+                        <div class="client-logo">
+                            <img src="image/logo-1.svg" alt="Client Logo">
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>© 2023 Zhang Ming's Personal Blog | All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+
+</html>
