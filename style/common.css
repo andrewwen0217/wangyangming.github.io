@@ -1,0 +1,281 @@
+/* common.css - 公共样式 */
+
+/* ========== 基础布局重置 ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+/* ========== 整体布局容器 ========== */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========== 头部背景区域 ========== */
+.header-background {
+  height: 300px;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.header-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.header-background:hover img {
+  transform: scale(1.05);
+}
+
+/* ========== 个人信息栏 ========== */
+.profile-section {
+  display: flex;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  position: relative;
+  z-index: 2;
+}
+
+.avatar-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 25px;
+  border: 5px solid white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.profile-info {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.profile-info h1 {
+  font-size: 2.2rem;
+  color: #2c3e50;
+  margin-bottom: 5px;
+}
+
+.profile-info p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.contact-info {
+  flex: 1;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f1f2f6;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #3498db;
+  color: white;
+  transform: translateY(-3px);
+}
+
+.contact-info ul li {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  color: #555;
+}
+
+.contact-info ul li i {
+  margin-right: 10px;
+  color: #3498db;
+  width: 20px;
+}
+
+/* ========== 导航菜单 ========== */
+.main-nav {
+  background: white;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.nav-list {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  margin: 0 15px;
+}
+
+.nav-item a {
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-weight: 500;
+  color: #555;
+  display: block;
+  transition: all 0.3s ease;
+}
+
+.nav-item a:hover {
+  background: #f1f2f6;
+  color: #3498db;
+}
+
+.nav-item a.active {
+  background: linear-gradient(to right, #3498db, #2c3e50);
+  color: white;
+  box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* ========== 内容主体区域 ========== */
+.content-container {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+/* ========== 侧边栏（关于我） ========== */
+.sidebar {
+  flex: 0 0 280px;
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  height: fit-content;
+  position: sticky;
+  top: 120px;
+  align-self: flex-start;
+}
+
+.sidebar h2 {
+  font-size: 1.8rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f1f2f6;
+}
+
+.sidebar p {
+  margin-bottom: 15px;
+  color: #555;
+  line-height: 1.7;
+}
+
+/* ========== 页脚 ========== */
+.site-footer {
+  text-align: center;
+  padding: 30px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* ========== 响应式布局 ========== */
+@media (max-width: 992px) {
+  .profile-section {
+    flex-direction: column;
+  }
+
+  .avatar-container {
+    margin: 0 auto 20px;
+  }
+
+  .profile-info {
+    padding-right: 0;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .contact-info {
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .content-container {
+    flex-direction: column;
+  }
+
+  .contact-info ul li {
+    justify-content: center;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-background {
+    height: 200px;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-item {
+    margin: 5px 0;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav-item a {
+    display: block;
+    width: 100%;
+  }
+}
